@@ -139,11 +139,18 @@ ETHICS REVIEW
 - Model documentation: [Model Card planned if releasing a model]
 ```
 
+### Artifact Locations
+
+When using the exploration structure, save the locked protocol and plans to:
+- `explorations/NNN-slug/protocol.md` — the full locked protocol
+- Raw datasets → `shared/data/` (shared, immutable)
+- Exploration-specific code → `explorations/NNN-slug/src/`
+
 ### Step 8: Lock the Protocol
 
 Once all sections are filled:
 1. Write the full protocol using [templates/experiment-protocol.md](../templates/experiment-protocol.md)
-2. Save it in the project repo (e.g., `docs/protocol.md` or on OSF)
+2. Save it to the exploration directory (e.g., `explorations/NNN-slug/protocol.md`)
 3. Have a collaborator review it (or self-review after 24h)
 4. Mark the protocol as LOCKED in the LOGBOX
 5. Any deviations from this point forward must be logged as EXPLORATORY

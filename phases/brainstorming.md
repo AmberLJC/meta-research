@@ -101,6 +101,24 @@ Once a direction survives:
 3. Lock these before scaling up — this is your informal "preregistration"
 4. Log the commitment in LOGBOX
 
+### Step 7: Initialize Exploration Directory
+
+If the project uses the exploration structure (see SKILL.md § File Management):
+
+1. Create `explorations/NNN-slug/` — next sequential number + kebab-case name
+2. Save brainstorming artifacts to the exploration directory:
+   - `brainstorm.md` — scoring table, research statement, and falsification results
+3. Add a row to the Exploration Registry in LOGBOX (status: `active`, parent: `—` or
+   the exploration this was forked from)
+
+**Multiple viable ideas**: if brainstorming produces 2-3 ideas above the 3.5 threshold,
+create an exploration directory for each. Set the one the user chooses to pursue first
+as `active` and the others as `paused`.
+
+**Forking from a failed exploration**: when pivoting after a failed direction, set the old
+exploration to `archived` and create the new one with the old ID as `parent`. Promote any
+reusable artifacts (evidence maps, datasets) to `shared/`.
+
 ## Prompt Bank
 
 Use these questions to push thinking during brainstorming:
@@ -131,6 +149,7 @@ Use these questions to push thinking during brainstorming:
 - [ ] Fast falsification did not kill the top pick
 - [ ] Primary metric, dataset, and baseline are identified (not yet locked)
 - [ ] Research statement (1 paragraph) is written
+- [ ] Exploration directory created (if using multi-exploration structure)
 - [ ] LOGBOX entry recorded
 
 ## Transition
@@ -138,5 +157,9 @@ Use these questions to push thinking during brainstorming:
 **Forward → Lit Review**: carry the research statement, initial candidate papers, and
 scoring table.
 
-**Backward ← Lit Review**: if novelty gap turns out to be false, return here with the
-evidence and re-score or generate new candidates.
+**Backward ← Lit Review**: if novelty gap turns out to be false, archive the current
+exploration (`archived` in LOGBOX), return here, and either re-score or create a new
+exploration.
+
+**Fork → New Exploration**: if multiple viable ideas exist, create separate explorations
+and let the user choose which to activate first.

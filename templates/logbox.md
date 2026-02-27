@@ -14,6 +14,29 @@ Create `LOGBOX.md` at the project root with this structure:
 |---|-------|---------|------|
 ```
 
+### Multi-exploration format
+
+When the project has multiple research directions, add an **Exploration Registry** table
+at the top to track all explorations and their relationships:
+
+```markdown
+# Research Logbox: [Project Title]
+
+## Explorations
+| ID | Name | Status | Parent | Current Phase | Started |
+|----|------|--------|--------|---------------|---------|
+
+## Decision Log
+| # | Phase | Summary | Date |
+|---|-------|---------|------|
+```
+
+**Status values**: `active` / `paused` / `completed` / `archived`
+
+Prefix each Decision Log entry with `[NNN]` to tie it to a specific exploration.
+The Explorations table is only needed when multiple directions exist — for single-direction
+projects, use the simple format above.
+
 ## Entry Types
 
 ### Phase Entry (work within a phase)
@@ -92,3 +115,30 @@ Create `LOGBOX.md` at the project root with this structure:
 
 Notice the natural back-and-forth between phases — this is expected and healthy.
 The logbox makes the non-linear process transparent and auditable.
+
+## Example: Multi-Exploration Logbox
+
+When a project pivots to a new direction, the logbox tracks both explorations:
+
+```markdown
+# Research Logbox: Efficient In-Context Learning
+
+## Explorations
+| ID | Name | Status | Parent | Current Phase | Started |
+|----|------|--------|--------|---------------|---------|
+| 001 | prompt-compression | archived | — | lit-review | 2026-02-15 |
+| 002 | retrieval-icl | active | 001 | analysis | 2026-02-22 |
+
+## Decision Log
+| # | Phase | Summary | Date |
+|---|-------|---------|------|
+| 1 | Brainstorm | [001] Generated 12 candidates. Top pick: prompt compression for long contexts. | 2026-02-15 |
+| 2 | Brainstorm → Lit Review | [001] Moving to evidence mapping. | 2026-02-16 |
+| 3 | Lit Review | [001] Novelty gap closed: [paper X] covers our exact formulation. Archiving. | 2026-02-21 |
+| 4 | Brainstorm | [002] Pivoted from 001. New direction: retrieval-augmented ICL. Reused evidence map → shared/literature/. | 2026-02-22 |
+| 5 | Brainstorm → Lit Review | [002] Supplementing lit review with retrieval-specific papers. | 2026-02-23 |
+| 6 | Lit Review → Experiment Design | [002] Novelty gap confirmed. 3 baselines identified. | 2026-02-25 |
+| 7 | Experiment Design → Analysis | [002] Protocol locked. Running experiments. | 2026-02-28 |
+```
+
+The `[NNN]` prefix makes it easy to filter the log for a specific exploration.

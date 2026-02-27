@@ -30,6 +30,40 @@ pipeline** that reduces bias, ambiguity, and undocumented decisions at every sta
 4. **Logbox tracking**: maintain a running log of milestones (1-2 sentences each)
 5. **Falsification mindset**: design to disprove, not to confirm
 
+## File Management
+
+Research trajectories branch — you may explore an idea, fail, pivot, and try again. The
+file system must stay clean while preserving the full history.
+
+**Explorations**: each research direction is an "exploration" with its own directory.
+
+```
+project/
+├── LOGBOX.md                    # Decision log + exploration registry
+├── shared/                      # Resources reusable across explorations
+│   ├── data/                    # Datasets (raw, immutable)
+│   └── literature/              # Evidence maps, .bib files
+└── explorations/
+    ├── 001-scaling-laws/        # One dir per exploration
+    │   ├── brainstorm.md        # Phase artifact (one file per phase)
+    │   ├── lit-review.md
+    │   ├── protocol.md
+    │   ├── analysis.md
+    │   ├── draft.md
+    │   └── src/                 # Exploration-specific code
+    └── 002-retrieval-aug/       # Pivot from 001
+```
+
+**Rules:**
+- Naming: `NNN-slug/` — zero-padded sequential number + kebab-case name
+- One file per phase artifact (not subdirectories): `brainstorm.md`, `lit-review.md`,
+  `protocol.md`, `analysis.md`, `draft.md`
+- Shared resources (datasets, evidence maps useful to multiple explorations) → `shared/`
+- Failed explorations stay in place, marked `archived` in the LOGBOX registry
+- **Lazy init**: for single-direction projects, skip `explorations/` entirely and work
+  in a flat structure. Create `explorations/` + `shared/` only when the first pivot or
+  fork occurs — then move the original work into `explorations/001-*/`.
+
 ## Research Workflow State Machine
 
 The workflow has 5 phases. Transitions are **non-linear** — any phase can trigger a
@@ -66,9 +100,14 @@ return to an earlier phase when new evidence demands it.
 | Writing          | Analysis          | Reviewer/self-review finds missing ablation or evidence  |
 | Writing          | Experiment Design | Scope change requires new experiments                    |
 | Any phase        | Brainstorm        | Fundamental pivot needed                                 |
+| Any phase        | New Exploration   | Direction is dead; promising fork identified              |
 
 **When transitioning back**: log the reason in the LOGBOX, update the phase status, and
 carry forward any reusable artifacts from the current phase.
+
+**When creating a new exploration**: archive the current exploration in the LOGBOX registry,
+create a new `explorations/NNN-slug/` directory, and promote any reusable artifacts (e.g.,
+evidence maps) to `shared/`.
 
 ## How to Operate
 
@@ -86,12 +125,15 @@ carry forward any reusable artifacts from the current phase.
    - [phases/writing.md](phases/writing.md) — Reporting, dissemination, artifacts
 
 3. **Initialize or resume the LOGBOX**: create `LOGBOX.md` in the project root if it
-   does not exist. Each entry is:
-   ```
-   | # | Phase | Summary (1-2 sentences) | Date |
-   ```
+   does not exist. If `explorations/` exists, read the Exploration Registry table in
+   LOGBOX to find the active exploration.
 
-4. **Create a task list** for the current phase using TaskCreate, so the user sees
+4. **Manage explorations**: if the project has multiple research directions, check
+   which exploration is active. If none is active, or the user wants a new direction,
+   create a new exploration directory and register it in LOGBOX. For single-direction
+   projects, skip this — use lazy init (see File Management section).
+
+5. **Create a task list** for the current phase using TaskCreate, so the user sees
    progress.
 
 ### Per-phase protocol
@@ -103,13 +145,15 @@ ENTER PHASE
   ├─ Log entry: "Entering [phase] because [reason]"
   ├─ Read the phase detail file for specific instructions
   ├─ Execute phase tasks (with user checkpoints at key decisions)
-  ├─ Produce phase artifact (documented output)
+  ├─ Produce phase artifact → save to exploration dir (e.g., explorations/NNN/phase.md)
+  │   └─ If artifact is reusable across explorations → copy to shared/
   ├─ Run exit criteria check:
   │   ├─ PASS → log completion, advance to next phase
   │   └─ FAIL → identify blocker, decide:
   │       ├─ Fix within phase → iterate
-  │       └─ Requires earlier phase → log reason, transition back
-  └─ Update LOGBOX with milestone summary
+  │       ├─ Requires earlier phase → log reason, transition back
+  │       └─ Direction is dead → archive exploration, create new one
+  └─ Update LOGBOX with milestone summary (prefix with [NNN] if multiple explorations)
 ```
 
 ### Exit criteria per phase
@@ -125,26 +169,41 @@ ENTER PHASE
 ## Logbox Management
 
 The LOGBOX is the project's decision provenance trail. It answers: what happened, when,
-and why.
+and why. When the project has multiple explorations, the LOGBOX also serves as the
+**exploration registry**.
 
 **Format** (`LOGBOX.md` at project root):
 
 ```markdown
 # Research Logbox
 
+## Explorations
+| ID | Name | Status | Parent | Current Phase | Started |
+|----|------|--------|--------|---------------|---------|
+| 001 | scaling-laws | archived | — | lit-review | 2026-02-27 |
+| 002 | retrieval-aug | active | 001 | experiment | 2026-03-01 |
+
+## Decision Log
 | # | Phase | Summary | Date |
 |---|-------|---------|------|
-| 1 | Brainstorm | Identified 3 candidate directions; selected X based on feasibility+novelty score. | YYYY-MM-DD |
-| 2 | Brainstorm→Lit Review | Transitioned after scoring. Top idea: [one-liner]. | YYYY-MM-DD |
-| 3 | Lit Review | Searched 4 databases, screened 47 papers, 12 included. Key gap: [gap]. | YYYY-MM-DD |
-| 4 | Lit Review→Brainstorm | BACKTRACK: discovered [paper] that solves our approach. Pivoting. | YYYY-MM-DD |
+| 1 | Brainstorm | [001] Identified 3 candidate directions; selected scaling-laws. | 2026-02-27 |
+| 2 | Brainstorm→Lit Review | [001] Transitioned after scoring. | 2026-02-28 |
+| 3 | Lit Review | [001] Novelty gap closed by [paper]. Archiving. | 2026-03-01 |
+| 4 | Brainstorm | [002] Pivoted from 001. Reusing evidence map in shared/. | 2026-03-01 |
 ```
+
+Note: the Explorations table is only needed when the project has multiple research
+directions. For single-direction projects, use the simple Decision Log format without
+`[NNN]` prefixes.
+
+**Status values**: `active` / `paused` / `completed` / `archived`
 
 **Rules**:
 - ALWAYS log phase entries AND transitions (including backtracks)
 - Keep each summary to 1-2 sentences maximum
 - Include the trigger reason for any backward transition
 - Number entries sequentially (never renumber)
+- Prefix summaries with `[NNN]` when multiple explorations exist
 
 ## Bias Mitigation (Active Throughout)
 
@@ -188,9 +247,11 @@ If something goes wrong mid-phase:
 
 1. Log the error in LOGBOX with context
 2. Assess if the error is fixable within the current phase
-3. If not, identify which earlier phase needs revisiting
+3. If not, identify which earlier phase needs revisiting — or whether the exploration
+   should be archived and a new one spawned
 4. Present the user with: what happened, why, and your recommended path forward
-5. Do NOT silently restart or discard work — all artifacts are preserved
+5. Do NOT silently restart or discard work — all artifacts are preserved in their
+   exploration directory. Failed explorations are archived, not deleted.
 
 ## Installation
 

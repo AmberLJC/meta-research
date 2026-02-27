@@ -165,6 +165,9 @@ Organize outputs for the Writing phase:
 - Run ID mapping: which table/figure comes from which tracked run
 - Raw numbers: exportable and reproducible from tracked experiments
 
+**Artifact location**: save the consolidated analysis (results, ablations, error analysis,
+claim assessment) to `explorations/NNN-slug/analysis.md`.
+
 ## Exit Criteria
 
 - [ ] All sanity checks passed

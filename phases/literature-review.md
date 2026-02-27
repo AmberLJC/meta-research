@@ -146,6 +146,15 @@ Cross-cutting concerns:
   - Datasets: [standard benchmarks, limitations, emerging alternatives]
 ```
 
+### Artifact Locations
+
+When using the exploration structure, save outputs to the active exploration:
+- Search protocol, screening log, PRISMA numbers, extractions, evidence map →
+  `explorations/NNN-slug/lit-review.md` (single consolidated file)
+- If the evidence map is **reusable across explorations** (e.g., covers a broad topic),
+  also save it to `shared/literature/` so future explorations can reference it
+- Shared bibliography → `shared/literature/references.bib`
+
 ### Step 7: Validate Novelty Gap
 
 Ask explicitly:
@@ -171,8 +180,9 @@ with the evidence. This is not a failure — it is the system working correctly.
 **Forward → Experiment Design**: carry the evidence map, baseline set, dataset candidates,
 and validated research statement.
 
-**Backward → Brainstorm**: if novelty gap is false, carry the evidence that invalidates
-the original idea.
+**Backward → Brainstorm**: if novelty gap is false, archive the exploration and carry the
+evidence that invalidates the original idea. Promote reusable artifacts (evidence map,
+bibliography) to `shared/literature/` before archiving.
 
 **Backward ← Experiment Design**: if design reveals missing baselines or datasets, return
 here to find them.

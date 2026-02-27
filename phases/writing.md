@@ -155,6 +155,13 @@ PRE-SUBMISSION CHECKS
 - Add CITATION.cff to the repository
 - Include DOI from Zenodo or other archive
 
+### Artifact Locations
+
+When using the exploration structure:
+- Paper draft → `explorations/NNN-slug/draft.md`
+- Release-ready code → `explorations/NNN-slug/src/` (cleaned, tagged)
+- Figures → `explorations/NNN-slug/figures/` (if many; or inline in draft.md)
+
 ### Step 9: Post-Publication Maintenance
 
 - Monitor for questions, issues, and replication attempts
