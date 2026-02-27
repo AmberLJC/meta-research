@@ -10,34 +10,89 @@ divergence-to-convergence loop that mitigates confirmation bias and premature co
 - User has a broad topic area or a specific problem they want to explore
 - OR: backtracking from Lit Review because the novelty gap was false
 
+## Ideation Frameworks
+
+This phase uses 12 structured ideation frameworks for candidate generation. Load the full
+framework details from [phases/ideation-frameworks.md](ideation-frameworks.md). Each
+framework targets a distinct cognitive mode — use 2-3 per session based on the
+researcher's situation:
+
+| # | Framework | Best When |
+|---|-----------|-----------|
+| F1 | Problem-First vs. Solution-First | Orienting: classifying where the idea comes from |
+| F2 | Problem Reformulation | Feeling stuck — reframe the question itself |
+| F3 | Abstraction Laddering | Have a specific result, need to go broader or deeper |
+| F4 | Tension & Contradiction Hunting | Exploring a field — find unresolved trade-offs |
+| F5 | Analogical Reasoning & Cross-Pollination | Need genuinely novel angles from other fields |
+| F6 | What Changed? + Adjacent Possible | Revisiting old ideas under new conditions |
+| F7 | Failure Analysis & Boundary Probing | Challenging popular methods — find where they break |
+| F8 | Constraint Manipulation | Want transformational ideas — change the rules |
+| F9 | Negation and Inversion | Challenge conventional wisdom — flip assumptions |
+| F10 | Composition & Decomposition | Recombining or modularizing existing techniques |
+| F11 | Simplicity Test | Suspect a simpler approach would suffice |
+| F12 | Stakeholder Rotation | Need multiple perspectives on a system |
+
+**Quick selection** — match the researcher's situation:
+
+| Situation | Start With |
+|-----------|------------|
+| "I don't know what area to work in" | F4 (Tensions) → F6 (What Changed) |
+| "Vague area, no specific idea" | F3 (Abstraction) → F7 (Failure Analysis) |
+| "Have an idea, not sure it's good" | Two-Sentence Test → F11 (Simplicity) |
+| "Good idea, need a fresh angle" | F5 (Cross-Pollination) → F12 (Stakeholders) |
+| "Want to combine existing work" | F10 (Composition/Decomposition) |
+| "Found a technique, want to apply it" | F1 (Problem-First Check) → F12 (Stakeholders) |
+| "Challenge conventional wisdom" | F9 (Negation) → F7 (Failure Analysis) |
+| "Stuck thinking one way" | F2 (Reformulation) → F8 (Constraint Manipulation) |
+| "Revisiting an old/failed idea" | F6 (What Changed) → Adjacent Possible mapping |
+
 ## Step-by-Step Protocol
 
-### Step 1: Problem Landscape Map
+### Step 1: Diverge — Generate Candidates (Problem Landscape Map)
 
 Generate 10-30 candidate problems. For each, write a **one-sentence claim** — the
 thing you would defend if the research succeeds.
 
 **How to generate candidates:**
 - Ask the user about their domain, constraints, and interests
-- Search recent literature (arXiv, Semantic Scholar, Google Scholar) for active threads
-- Identify gaps: what is assumed but unverified? what fails at scale? what lacks baselines?
-- Check for "obvious baselines" that haven't been tried
-- Look for cross-pollination: methods from domain A applied to domain B
+- Select 2-3 ideation frameworks from the table above (see
+  [ideation-frameworks.md](ideation-frameworks.md) for full instructions)
+- Walk through each framework interactively, asking the researcher for domain-specific inputs
+- Additionally:
+  - Search recent literature (arXiv, Semantic Scholar, Google Scholar) for active threads
+  - Identify gaps: what is assumed but unverified? what fails at scale? what lacks baselines?
+  - Check for "obvious baselines" that haven't been tried
+
+**For a deep ideation session** (when the user wants thorough exploration), use the
+Integrated Creative Thinking Protocol from ideation-frameworks.md, which chains all 12
+frameworks across four phases (~90 min).
 
 **Output format:**
 ```
-| # | One-sentence claim | Domain | Source of idea |
-|---|-------------------|--------|----------------|
-| 1 | "Fine-tuning on X improves Y by Z%" | NLP | Gap in [paper] |
-| 2 | ... | | |
+| # | One-sentence claim | Domain | Source framework | Source of idea |
+|---|-------------------|--------|-----------------|----------------|
+| 1 | "Fine-tuning on X improves Y by Z%" | NLP | F7 (Boundary Probing) | Gap in [paper] |
+| 2 | "Applying auction theory to..." | ML Systems | F5 (Cross-Pollination) | Econ analogy |
+| 3 | ... | | | |
 ```
 
-### Step 2: Trajectory Sketching
+### Step 2: Trajectory Sketching + Two-Sentence Pitch
 
-For the top ~10 candidates, outline 2-3 plausible research arcs:
+For the top ~10 candidates, apply the **Two-Sentence Pitch Test** and outline 2-3
+plausible research arcs.
 
+**Two-Sentence Pitch** (quick filter before investing in trajectory sketching):
+> **S1** (Problem): "[Domain] struggles with [problem], which matters because [consequence]."
+> **S2** (Insight): "We [approach] by [mechanism], which works because [reason]."
+
+If a candidate cannot pass this test, it is not yet clear enough — return to Step 1 with
+a specific framework (F1 for unclear problem, F11 for unclear mechanism, F4 for unclear
+significance).
+
+**Trajectory arcs** for candidates that pass:
 ```
 Idea: [one-sentence claim]
+Two-sentence pitch: [S1] [S2]
 Arc A: [baseline] → [method improvement] → [generalization test]
 Arc B: [baseline] → [different method] → [ablation study]
 Arc C: [theoretical analysis] → [empirical validation] → [limits characterization]
@@ -121,7 +176,7 @@ reusable artifacts (evidence maps, datasets) to `shared/`.
 
 ## Prompt Bank
 
-Use these questions to push thinking during brainstorming:
+Use these questions to push thinking during brainstorming.
 
 **Problem & contribution:**
 - What is the smallest, sharpest claim we want to defend?
@@ -142,6 +197,33 @@ Use these questions to push thinking during brainstorming:
 - What metric best matches the real objective (and what metric is easiest to game)?
 - What "sanity check" would immediately invalidate our pipeline if it fails?
 - What ablations distinguish "real contribution" from incidental engineering?
+
+**Framework-specific probes** (use when applying ideation frameworks):
+- *Reformulation*: Are we solving the right problem, or a convenient proxy?
+- *Abstraction*: What is the general principle behind this specific result?
+- *Tension*: Which two goals does everyone want but treats as a trade-off?
+- *Analogy*: What field solves a structurally similar problem with different tools?
+- *What Changed*: What was dismissed 5 years ago that new conditions make viable?
+- *Boundary*: Where exactly does the current best method break down?
+- *Constraint*: Which hidden assumption, if dropped, would change everything?
+- *Negation*: What if the opposite of conventional wisdom were true?
+- *Composition*: What two existing techniques, combined, create emergent capability?
+- *Simplicity*: If we strip this to one key idea, does it still work?
+- *Stakeholder*: Who besides ML researchers would care about this problem?
+
+## Creative Blocks
+
+If the researcher is stuck, diagnose the block and apply a targeted framework
+(see the full table in [ideation-frameworks.md](ideation-frameworks.md)):
+
+| Block | Symptom | Unblock With |
+|-------|---------|-------------|
+| Fixation | Cannot think about the problem differently | F2 (Reformulation) |
+| Tunnel vision | All ideas from same subfield | F5 (Cross-Pollination) |
+| Self-censoring | Dismissing "weird" ideas too early | F9 (Negation) — evaluate after generating |
+| Incrementalism | Every idea is +2% on a benchmark | F8 (Constraint Manipulation) |
+| Analysis paralysis | Too many options | F6 (Adjacent Possible) — what is feasible now? |
+| False dichotomy | Stuck choosing A vs. B | F4 (Janusian Synthesis) |
 
 ## Exit Criteria
 

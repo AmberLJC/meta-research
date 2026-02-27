@@ -119,6 +119,7 @@ evidence maps) to `shared/`.
 
 2. **Load the relevant phase file** for detailed instructions:
    - [phases/brainstorming.md](phases/brainstorming.md) — Ideation and idea selection
+   - [phases/ideation-frameworks.md](phases/ideation-frameworks.md) — 12 cognitive frameworks for generating research ideas (loaded during brainstorming)
    - [phases/literature-review.md](phases/literature-review.md) — Search, screen, synthesize
    - [phases/experiment-design.md](phases/experiment-design.md) — Protocol, data, controls
    - [phases/analysis.md](phases/analysis.md) — Statistics, evaluation, ablations
