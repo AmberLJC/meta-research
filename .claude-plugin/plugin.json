@@ -1,0 +1,22 @@
+{
+  "name": "meta-research",
+  "version": "1.0.0",
+  "description": "Autonomous research workflow agent for AI and scientific research. Guides the full research lifecycle — brainstorming, literature review, experiment design, analysis, and writing — with dynamic phase transitions, logbox tracking, and reproducibility-first practices.",
+  "author": {
+    "name": "AmberLJC",
+    "url": "https://github.com/AmberLJC"
+  },
+  "repository": "https://github.com/AmberLJC/meta-research",
+  "license": "MIT",
+  "keywords": [
+    "research",
+    "science",
+    "AI",
+    "reproducibility",
+    "meta-science",
+    "literature-review",
+    "experiment-design",
+    "academic-writing"
+  ],
+  "skills": "./"
+}
