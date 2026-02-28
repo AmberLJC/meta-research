@@ -1,14 +1,16 @@
-# Phase: Literature Review
+# Phase: Literature Survey
 
 ## Goal
 
-Build a comprehensive, auditable evidence map that validates the novelty gap, identifies
-baselines and methods, and surfaces risks — using a documented, reproducible search process.
+Build a comprehensive understanding of the state of the art (SOTA), identify gaps,
+open problems, and underexplored areas — using a documented, reproducible search process.
+This is always the first phase: you cannot generate good hypotheses without knowing
+what the field has already done.
 
 ## Entry Conditions
 
-- A research statement exists (from Brainstorming or a user-provided question)
-- Primary metric, dataset, and baseline are tentatively identified
+- User has a broad research topic, domain, or specific question
+- OR: looping back from Reflection because new evidence requires updating the survey
 
 ## Step-by-Step Protocol
 
@@ -18,13 +20,13 @@ Before searching, write down:
 
 ```
 REVIEW PROTOCOL
-- Research question(s): [from brainstorming output]
+- Research area: [broad topic or specific question]
+- Key questions: [what do we need to learn about the field?]
 - Inclusion criteria: [topic, methodology, data regime, outcome type, date range]
 - Exclusion criteria: [irrelevant domains, non-peer-reviewed if applicable, languages]
 - Databases to search: [see database list below]
 - Search string structure: [Boolean terms with AND/OR/NOT]
 - Screening process: [title/abstract first, then full-text]
-- Expected timeline: [dates]
 ```
 
 **Database selection** (use at least 3 for comprehensive coverage):
@@ -67,11 +69,6 @@ For each database:
 - Apply inclusion/exclusion criteria strictly
 - Final decision: IN / OUT with reason
 
-**Track in a single source of truth** (spreadsheet or tool):
-```
-| # | Paper title | Authors | Year | Database | Screen 1 | Screen 2 | Decision | Reason |
-```
-
 ### Step 4: PRISMA-Style Audit Trail
 
 Document the flow of papers through screening:
@@ -79,16 +76,13 @@ Document the flow of papers through screening:
 ```
 Records identified through database searching: N1
 Additional records from citation chasing: N2
-─── Duplicates removed: N3
+--- Duplicates removed: N3
 Records screened (title/abstract): N4
-─── Excluded at screening: N5
+--- Excluded at screening: N5
 Full-text articles assessed: N6
-─── Excluded at full-text (with reasons): N7
+--- Excluded at full-text (with reasons): N7
 Studies included in synthesis: N8
 ```
-
-You do not need a formal PRISMA diagram for every project, but you DO need these numbers
-and the exclusion reasons to be recoverable.
 
 ### Step 5: Read and Extract (Three-Pass Method)
 
@@ -102,7 +96,7 @@ For each included paper, use a structured reading approach:
 **Pass 2 — Understanding (30-60 min):**
 - Read fully, annotate key claims and methods
 - Identify strengths and weaknesses
-- Note how it relates to YOUR research question
+- Note how it relates to the research area
 
 **Pass 3 — Verification (for critical papers only):**
 - Check math/proofs, re-derive key results if feasible
@@ -120,7 +114,7 @@ PAPER EXTRACTION
 - Evaluation: [metrics, baselines compared against]
 - Key result: [headline number or finding]
 - Limitations: [stated + unstated]
-- Relevance to our work: [how it connects: baseline? comparison? building block?]
+- Relevance to our area: [how it connects: baseline? comparison? building block?]
 - Artifacts available: [code? data? models? configs?]
 ```
 
@@ -146,24 +140,34 @@ Cross-cutting concerns:
   - Datasets: [standard benchmarks, limitations, emerging alternatives]
 ```
 
+### Step 7: Identify Open Problems and Underexplored Areas
+
+This is the critical output that feeds hypothesis generation. Go beyond the evidence
+map to explicitly catalogue:
+
+**Open problems** — questions the field is actively struggling with:
+- What contradictions exist between papers?
+- What assumptions are widely held but unverified?
+- What problems are acknowledged but unsolved?
+
+**Underexplored areas** — topics with insufficient investigation:
+- What combinations haven't been tried?
+- What conditions haven't been tested under?
+- What domains lack evaluation?
+- What "obvious baselines" are missing?
+
+**Update the research tree**: populate `field_understanding` with:
+- `sota_summary`: 1-2 paragraph summary of where the field stands
+- `key_papers`: papers critical to your research direction
+- `open_problems`: explicit list of open questions
+- `underexplored_areas`: gaps in the literature
+
 ### Artifact Locations
 
-When using the exploration structure, save outputs to the active exploration:
-- Search protocol, screening log, PRISMA numbers, extractions, evidence map →
-  `explorations/NNN-slug/lit-review.md` (single consolidated file)
-- If the evidence map is **reusable across explorations** (e.g., covers a broad topic),
-  also save it to `shared/literature/` so future explorations can reference it
-- Shared bibliography → `shared/literature/references.bib`
-
-### Step 7: Validate Novelty Gap
-
-Ask explicitly:
-- Does our research question still have a novel answer to contribute?
-- Has someone already done what we planned? If so, how do we differentiate?
-- Are our planned baselines still the right ones given what we found?
-
-**If the novelty gap is closed**: log this in LOGBOX and transition BACK to Brainstorming
-with the evidence. This is not a failure — it is the system working correctly.
+Save outputs to the project's `literature/` directory:
+- `literature/survey.md` — search protocol, screening log, PRISMA numbers, evidence map
+- `literature/evidence-map.md` — detailed evidence synthesis (if too large for survey.md)
+- `literature/references.bib` — bibliography in BibTeX format
 
 ## Exit Criteria
 
@@ -171,21 +175,18 @@ with the evidence. This is not a failure — it is the system working correctly.
 - [ ] Screening is tracked with inclusion/exclusion reasons
 - [ ] PRISMA-style numbers are recorded
 - [ ] Extraction schema filled for all included papers
-- [ ] Evidence map synthesized with themes, gaps, and baseline identification
-- [ ] Novelty gap validated (or backtrack triggered)
-- [ ] LOGBOX entry recorded
+- [ ] Evidence map synthesized with themes and gaps
+- [ ] Open problems and underexplored areas explicitly catalogued
+- [ ] Research tree `field_understanding` section populated
+- [ ] Research log entry recorded
 
 ## Transition
 
-**Forward → Experiment Design**: carry the evidence map, baseline set, dataset candidates,
-and validated research statement.
+**Forward → Hypothesis Generation**: carry the evidence map, open problems list, and
+underexplored areas. These are the raw material for generating hypotheses.
 
-**Backward → Brainstorm**: if novelty gap is false, archive the exploration and carry the
-evidence that invalidates the original idea. Promote reusable artifacts (evidence map,
-bibliography) to `shared/literature/` before archiving.
+**Backward ← Reflection**: if reflection reveals new questions or assumptions that need
+checking, return here to update the survey.
 
-**Backward ← Experiment Design**: if design reveals missing baselines or datasets, return
-here to find them.
-
-**Backward ← Analysis**: if new related work is discovered during analysis that changes
-assumptions, return here to update the evidence map.
+**Backward ← Experiment Execution**: if new related work is discovered during execution
+that changes assumptions, return here to update the evidence map.

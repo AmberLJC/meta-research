@@ -3,12 +3,13 @@
 Twelve empirically grounded frameworks for generating research ideas. Each targets a
 distinct cognitive operation — orienting, reformulating, abstracting, analogizing,
 constraining, inverting, combining, simplifying, probing, and synthesizing. Use them
-individually during brainstorming Step 1, or combine them using the integrated protocol
-at the end of this file.
+individually during hypothesis generation Step 1, or combine them using the integrated
+protocol at the end of this file.
 
-**Relationship to the brainstorming phase**: These frameworks are the *cognitive engines*
-that power candidate generation (brainstorming Steps 1-2). The brainstorming phase file
-provides the *operational workflow* (score, falsify, commit). Use both together.
+**Relationship to the hypothesis generation phase**: These frameworks are the *cognitive
+engines* that power candidate hypothesis generation. The hypothesis generation phase file
+([phases/hypothesis-generation.md](hypothesis-generation.md)) provides the *operational
+workflow* (generate, test, organize into tree). Use both together.
 
 ---
 
@@ -548,17 +549,17 @@ brainstorming protocol's scoring rubric (Step 4).
 
 ## Agent Usage Instructions
 
-When a researcher asks for help brainstorming research ideas:
+When a researcher needs help generating hypotheses:
 
 1. **Identify their starting point**: exploring a new area, stuck on a project, or
    evaluating an existing idea? Use the Framework Selection Guide.
 2. **Select 2-3 frameworks** appropriate to their situation.
 3. **Walk through frameworks interactively**: apply each step-by-step, asking the
    researcher for domain-specific inputs.
-4. **Generate candidates**: aim for 10-20 raw ideas across frameworks.
+4. **Generate candidates**: aim for 10-20 raw hypotheses across frameworks.
 5. **Apply the Two-Sentence Pitch Test** to filter to top candidates.
-6. **Hand off to brainstorming Steps 3-7** for feasibility gating, scoring, falsification,
-   and commitment.
+6. **Hand off to hypothesis generation** for organizing into the research tree, then
+   to the judgment gate for evaluation.
 
 **Key Principles**:
 - Generative mode first, evaluative mode second — do not filter prematurely

@@ -2,29 +2,28 @@
 
 ## Goal
 
-Create a locked, reviewable experimental protocol that specifies exactly what will be
-tested, how, and what constitutes success — before running large-scale experiments.
+Create a locked, reviewable experimental protocol for a specific approved hypothesis.
+The protocol specifies exactly what will be tested, how, and what constitutes success —
+before running large-scale experiments.
 
 ## Entry Conditions
 
-- Validated research statement and novelty gap (from Lit Review)
-- Evidence map with identified baselines, datasets, and methods
-- Primary metric tentatively chosen
+- At least one hypothesis has `status: approved` in the research tree (from Judgment)
+- Evidence map with identified baselines, datasets, and methods (from Literature Survey)
+- Hypothesis statement is specific and falsifiable
 
 ## Step-by-Step Protocol
 
-### Step 1: Sharpen the Hypothesis
+### Step 1: Select the Hypothesis
 
-Convert the research statement into a **testable hypothesis**:
+Choose the highest-priority approved hypothesis from the research tree. Record:
+- Hypothesis ID (e.g., H1)
+- Full statement
+- Motivation
+- Relevant findings from the literature survey
 
-```
-HYPOTHESIS TEMPLATE
-- Claim: [method X] [improves/changes/enables] [metric Y] on [data Z]
-         compared to [baseline B] under [conditions C].
-- Direction: [X > B by at least D] OR [X ≠ B] OR [mechanism M explains effect]
-- Scope: [in-domain / cross-domain / cross-lingual / deployment-like / mechanistic]
-- Null hypothesis: [there is no difference / the mechanism does not explain the effect]
-```
+The hypothesis statement from the research tree IS the testable claim — no further
+sharpening is needed (that was done during Hypothesis Generation and Judgment).
 
 ### Step 2: Define Variables and Controls
 
@@ -73,7 +72,7 @@ COMPUTE PLAN
   - Fixed (not tuned): [list with values and justification]
   - Tuned: [list with search space, search method, budget]
   - Tuning done on: [validation set ONLY — never test]
-- Random seeds: [number of runs per condition, e.g., 5 seeds]
+- Random seeds: [number of runs per condition, e.g., 5]
 - Hardware: [GPU/TPU type, count, memory]
 - Expected runtime: [per run, total]
 - Checkpointing: [frequency, what is saved]
@@ -92,12 +91,12 @@ Primary analysis:
 - Decision rule: [what constitutes "better"? just point estimate? CI must exclude 0?]
 
 Uncertainty reporting:
-- Across seeds: [mean ± std, or CI from N runs]
+- Across seeds: [mean +/- std, or CI from N runs]
 - Across datasets: [if applicable]
 - Visualization: [box plots, violin plots, or distribution histograms]
 
 Multiple comparisons:
-- How many comparisons: [N models × M datasets × K metrics]
+- How many comparisons: [N models x M datasets x K metrics]
 - Correction: [Bonferroni / Holm / none-but-frame-as-exploratory]
 
 Ablation plan:
@@ -122,7 +121,7 @@ ARTIFACT PLAN
 - Environment: [conda yml / pip lockfile / Docker container]
 - Experiment tracking: [tool: MLflow / W&B / DVC / etc.]
 - Run naming scheme: [e.g., {method}_{dataset}_{seed}_{timestamp}]
-- How to map paper tables → run IDs: [documented mapping]
+- How to map paper tables -> run IDs: [documented mapping]
 - Data release: [plan or justification for not releasing]
 - Model release: [plan or justification for not releasing]
 - Expected storage footprint: [for artifacts, checkpoints, logs]
@@ -139,43 +138,45 @@ ETHICS REVIEW
 - Model documentation: [Model Card planned if releasing a model]
 ```
 
-### Artifact Locations
-
-When using the exploration structure, save the locked protocol and plans to:
-- `explorations/NNN-slug/protocol.md` — the full locked protocol
-- Raw datasets → `shared/data/` (shared, immutable)
-- Exploration-specific code → `explorations/NNN-slug/src/`
-
 ### Step 8: Lock the Protocol
 
 Once all sections are filled:
 1. Write the full protocol using [templates/experiment-protocol.md](../templates/experiment-protocol.md)
-2. Save it to the exploration directory (e.g., `explorations/NNN-slug/protocol.md`)
+2. Save it to the hypothesis's experiment directory: `experiments/H[N]-slug/protocol.md`
 3. Have a collaborator review it (or self-review after 24h)
-4. Mark the protocol as LOCKED in the LOGBOX
-5. Any deviations from this point forward must be logged as EXPLORATORY
+4. Update the research tree: `experiment.status: locked`
+5. Log the protocol lock in the research log
+6. Any deviations from this point forward must be logged as EXPLORATORY
+
+### Artifact Locations
+
+Save the locked protocol and plans to the hypothesis experiment directory:
+- `experiments/H[N]-slug/protocol.md` — the full locked protocol
+- `experiments/H[N]-slug/src/` — experiment-specific code
+- Shared datasets → `shared/data/` or project-level data directory
 
 ## Exit Criteria
 
-- [ ] Hypothesis is testable with clear direction and scope
+- [ ] Hypothesis ID is recorded and linked to the research tree
 - [ ] Variables, controls, and confounders documented
 - [ ] Data plan with splits and leakage prevention
 - [ ] Compute plan with seed count and hardware specs
 - [ ] Analysis plan pre-committed (primary and ablation)
 - [ ] Artifact plan with environment and tracking setup
 - [ ] Ethics review completed
-- [ ] Protocol locked and logged in LOGBOX
+- [ ] Protocol locked; research tree updated (`experiment.status: locked`)
+- [ ] Research log entry recorded
 
 ## Transition
 
-**Forward → Analysis**: carry the locked protocol. Implementation and execution happen
-between design and analysis — the agent should help set up code, configs, and tracking.
+**Forward → Experiment Execution**: carry the locked protocol. The hypothesis is ready
+for implementation and execution.
 
-**Backward → Lit Review**: if design reveals that a critical baseline or dataset is
-missing from the evidence map, return to find it.
+**Backward → Literature Survey**: if design reveals that a critical baseline or dataset
+is missing from the evidence map, return to find it.
 
-**Backward ← Analysis**: if pipeline bugs or data leakage are found during analysis,
-return here to fix the protocol and re-run.
+**Backward ← Experiment Execution**: if pipeline bugs or data leakage are found during
+execution, return here to fix the protocol and re-run.
 
-**Backward ← Writing**: if reviewers identify missing experiments, return here to design
-additional tests.
+**Backward ← Reflection**: if reflection identifies missing experiments, return here to
+design additional tests for new or refined hypotheses.

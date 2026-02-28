@@ -3,17 +3,32 @@
 ## Goal
 
 Produce a transparent, reproducible research document and release artifacts that allow
-others to evaluate, replicate, and build on the work.
+others to evaluate, replicate, and build on the work. This phase is entered when
+Reflection decides to conclude the research loop.
 
 ## Entry Conditions
 
-- Analysis is complete with claim assessment
-- Confirmatory/exploratory boundary is clear
-- Results tables, figures, and run ID mappings are ready
+- Reflection has decided to conclude (not loop back)
+- Research tree has completed hypotheses with determined outcomes
+- Confirmatory/exploratory boundary is clear for all results
+- Claim assessments are complete
 
 ## Step-by-Step Protocol
 
-### Step 1: Choose Reporting Framework
+### Step 1: Gather Results from the Research Tree
+
+Read `research-tree.yaml` and compile:
+- All completed hypotheses with their outcomes (supported/refuted/inconclusive)
+- Key metrics and deltas for each hypothesis
+- Claim assessments from the Reflection phase
+- The overall narrative: what did we learn?
+
+Also gather from experiment directories:
+- Results tables, figures, and run ID mappings
+- Ablation results and error analyses
+- Confirmatory vs exploratory labels
+
+### Step 2: Choose Reporting Framework
 
 Select the appropriate reporting guideline for your study type:
 
@@ -30,14 +45,14 @@ For most AI research, the **ML Reproducibility Checklist** (see
 [templates/reproducibility-checklist.md](../templates/reproducibility-checklist.md))
 is the primary framework, augmented by venue-specific requirements.
 
-### Step 2: Structure the Paper (Methods-First)
+### Step 3: Structure the Paper (Methods-First)
 
 Write in this order (not the order sections appear in the paper):
 
 1. **Methods** — what you did, exactly, so someone could reproduce it
 2. **Results** — what happened, with uncertainty and ablations
 3. **Introduction** — why it matters, what the gap is, what you claim
-4. **Related Work** — how this connects to existing evidence (from Lit Review)
+4. **Related Work** — how this connects to existing evidence (from Literature Survey)
 5. **Discussion/Limitations** — what the results mean, what they don't mean
 6. **Abstract** — last, because it summarizes everything else
 7. **Conclusion** — tightest summary of contribution and implications
@@ -45,7 +60,7 @@ Write in this order (not the order sections appear in the paper):
 **Why methods-first?** It forces precision. If you can't write the methods clearly,
 the experiment may not be well-defined enough.
 
-### Step 3: Methods Section Essentials
+### Step 4: Methods Section Essentials
 
 The methods section is the paper's reproducibility interface. Include:
 
@@ -61,7 +76,7 @@ METHODS CHECKLIST
 [ ] Statistical analysis: tests used, CI method, multiple comparison handling
 ```
 
-### Step 4: Results Section Essentials
+### Step 5: Results Section Essentials
 
 Present results transparently:
 
@@ -77,10 +92,9 @@ Present results transparently:
 - Include absolute numbers alongside percentages
 - Never round in a way that hides meaningful differences
 
-### Step 5: Limitations Section
+### Step 6: Limitations Section
 
-Write an honest limitations section. This is not a weakness — it is a strength of
-rigorous work. Cover:
+Write an honest limitations section. Cover:
 
 ```
 LIMITATIONS TEMPLATE
@@ -92,11 +106,11 @@ LIMITATIONS TEMPLATE
 - What we would do differently: [with more time/compute/data]
 ```
 
-### Step 6: Prepare Artifacts for Release
+### Step 7: Prepare Artifacts for Release
 
 **Code release:**
 - Clean the repository: remove dead code, add comments where non-obvious
-- Create a `README.md` with reproduction instructions (use template from SKILL.md)
+- Create a README with reproduction instructions
 - Tag the exact commit that produces the paper's results
 - Pin environment (conda env export / pip freeze / Docker)
 
@@ -104,19 +118,17 @@ LIMITATIONS TEMPLATE
 - Provide Datasheet/Data Statement documentation
 - Use FAIR principles: findable (DOI), accessible (open repo), interoperable
   (standard format), reusable (license + documentation)
-- If data cannot be released: document why and provide access instructions
 
 **Model release** (if applicable):
 - Provide Model Card documentation
 - Include: intended use, out-of-scope use, evaluation across conditions, limitations
-- Consider licensing: what are users allowed to do with the model?
 
 **Experiment artifacts:**
 - Map from paper tables/figures to tracked run IDs
 - Export configs used for all reported experiments
 - Archive logs and metrics (not just final numbers)
 
-### Step 7: Pre-Submission Checklist
+### Step 8: Pre-Submission Checklist
 
 Run through the reproducibility checklist:
 [templates/reproducibility-checklist.md](../templates/reproducibility-checklist.md)
@@ -136,33 +148,29 @@ PRE-SUBMISSION CHECKS
 [ ] Author contributions documented (CRediT taxonomy)
 ```
 
-### Step 8: Dissemination Strategy
+### Step 9: Dissemination Strategy
 
 **Preprint:**
 - Post to arXiv (or relevant preprint server) for rapid visibility
-- Note: preprints are not peer-reviewed — frame accordingly
 
 **Archival submission:**
 - Choose target venue based on scope, audience, and timeline
 - Adapt formatting to venue requirements
-- Address reproducibility requirements specific to the venue
 
 **Archival repository:**
 - Archive code + data + artifacts to Zenodo (or similar) for DOI and long-term access
-- Connect GitHub releases to Zenodo for automatic archiving
 
 **Software citation:**
 - Add CITATION.cff to the repository
-- Include DOI from Zenodo or other archive
 
 ### Artifact Locations
 
-When using the exploration structure:
-- Paper draft → `explorations/NNN-slug/draft.md`
-- Release-ready code → `explorations/NNN-slug/src/` (cleaned, tagged)
-- Figures → `explorations/NNN-slug/figures/` (if many; or inline in draft.md)
+Save outputs to the project's `drafts/` directory:
+- `drafts/paper.md` (or `.tex`) — the paper draft
+- `drafts/figures/` — publication-ready figures
+- Release-ready code stays in `experiments/H[N]-slug/src/` (cleaned, tagged)
 
-### Step 9: Post-Publication Maintenance
+### Step 10: Post-Publication Maintenance
 
 - Monitor for questions, issues, and replication attempts
 - Fix bugs in released code (tag patches separately from paper version)
@@ -179,15 +187,15 @@ When using the exploration structure:
 - [ ] Reproducibility checklist passes
 - [ ] Pre-submission checklist complete
 - [ ] Dissemination plan documented
-- [ ] LOGBOX final entry recorded
+- [ ] Research log final entry recorded
 
 ## Transition
 
-**Backward → Analysis**: if writing reveals missing ablations, insufficient evidence, or
-errors in the analysis, return to fill gaps.
+**Backward → Reflection**: if writing reveals missing ablations, insufficient evidence,
+or errors in the analysis, return to reflection to decide next steps.
 
 **Backward → Experiment Design**: if scope changes require new experiments (e.g., reviewer
-requests additional baselines), return to design them properly before running.
+requests additional baselines), return to design them properly.
 
-**Backward → Lit Review**: if a reviewer identifies missed related work that changes
-positioning, return to update the evidence map.
+**Backward → Literature Survey**: if a reviewer identifies missed related work that
+changes positioning, return to update the evidence map.
