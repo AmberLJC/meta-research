@@ -13,7 +13,7 @@
       "name": "meta-research",
       "description": "Autonomous research workflow agent for AI and scientific research. Guides the full research lifecycle — brainstorming, literature review, experiment design, analysis, and writing.",
       "source": "./",
-      "strict": false,
+      "strict": true,
       "skills": [
         "./"
       ]
