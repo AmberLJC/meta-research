@@ -11,7 +11,7 @@ argument-hint: "[research question or topic]"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch, Task, TaskCreate, TaskUpdate, TaskList, AskUserQuestion
 metadata:
   author: AmberLJC
-  version: "2.0.0"
+  version: "2.1.0"
   tags: research, science, AI, reproducibility, hypothesis-driven, meta-science
 ---
 
@@ -202,6 +202,24 @@ ENTER PHASE
 | Experiment Execution | Results + outcome per hypothesis | Primary claim determined with pre-specified evidence |
 | Reflection | Strategic decision (deeper/broader/pivot/conclude) | Decision is justified and logged |
 | Writing | Draft with methods, results, limitations, artifacts | Reproducibility checklist passes |
+
+## Git Commit Timing
+
+Create a git commit at these four points in the research loop. The protocol lock must
+be committed before results exist — this ordering is your lightweight pre-registration.
+
+| # | When | Message Pattern |
+|---|------|-----------------|
+| 1 | After hypotheses/reflection and experiment plan are generated | `research(plan): hypotheses + locked protocol for H[N]` |
+| 2 | After experiment code is generated | `research(code): experiment implementation for H[N]` |
+| 3 | After experiment results are generated | `research(results): outcomes for H[N] — [supported/refuted/inconclusive]` |
+| 4 | After writing is finished | `research(writing): complete draft — [title]` |
+
+**Rule**: commit #1 and commit #3 must never be combined. The git history must prove
+the experiment plan existed before the results.
+
+On loop iterations (reflection → new hypotheses → new experiments), repeat commits 1-3
+for each loop. Tag `submission-v[N]` on commit #4.
 
 ## Bias Mitigation (Active Throughout)
 
