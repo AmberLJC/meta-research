@@ -89,12 +89,15 @@ project/
 │   ├── survey.md               # Search protocol, screening, evidence map
 │   ├── evidence-map.md         # Detailed evidence synthesis
 │   └── references.bib          # Bibliography
+├── shared/
+│   └── data/                   # Datasets used by multiple hypotheses
 ├── experiments/
 │   ├── H1-scaling-hypothesis/
-│   │   ├── protocol.md         # Locked experiment protocol
-│   │   ├── src/                # Experiment code
-│   │   ├── results/            # Raw results and metrics
-│   │   └── analysis.md         # Consolidated analysis
+│   │   ├── docs/               # protocol.md, analysis.md, notes.md
+│   │   ├── src/                # Training, evaluation, analysis scripts + configs
+│   │   ├── data/               # raw/ (symlinks), processed/, splits/
+│   │   ├── results/            # runs/, tables/, figures/
+│   │   └── logs/               # runs/, tracking/, sanity-checks.md
 │   └── H2-alternative-approach/
 └── drafts/
     ├── paper.md                # Paper draft
@@ -120,7 +123,7 @@ Literature Survey → Hypothesis Generation → Judgment Gate → Experiment Des
 | **Literature Survey** | Understand SOTA, identify gaps, open problems, underexplored areas | [phases/literature-survey.md](phases/literature-survey.md) |
 | **Hypothesis Generation** | Generate broad testable hypotheses, maintain tree in YAML | [phases/hypothesis-generation.md](phases/hypothesis-generation.md) |
 | **Judgment Gate** | Evaluate: novel? important? feasible? falsifiable? already solved? | [phases/judgment.md](phases/judgment.md) |
-| **Experiment Design** | Rigorous per-hypothesis protocol ([design reference](phases/experiment-design-reference.md)) | [phases/experiment-design.md](phases/experiment-design.md) |
+| **Experiment Design** | Rigorous per-hypothesis protocol with design principles | [phases/experiment-design.md](phases/experiment-design.md) |
 | **Experiment Execution** | Run experiments, track results, update tree | [phases/experiment-execution.md](phases/experiment-execution.md) |
 | **Reflection** | Analyze results, decide: go deeper, go broader, pivot, or conclude | [phases/reflection.md](phases/reflection.md) |
 | **Writing** | (Optional exit) Draft paper, prepare artifacts | [phases/writing.md](phases/writing.md) |
@@ -165,8 +168,7 @@ and carry forward any reusable artifacts.
    - [phases/hypothesis-generation.md](phases/hypothesis-generation.md) — Generate and organize hypotheses
    - [phases/ideation-frameworks.md](phases/ideation-frameworks.md) — 12 cognitive frameworks for idea generation (loaded during hypothesis generation)
    - [phases/judgment.md](phases/judgment.md) — Evaluate hypotheses before investing
-   - [phases/experiment-design.md](phases/experiment-design.md) — Protocol, data, controls
-   - [phases/experiment-design-reference.md](phases/experiment-design-reference.md) — Principles of rigorous experiment design (loaded during experiment design)
+   - [phases/experiment-design.md](phases/experiment-design.md) — Protocol, design principles, per-hypothesis directory structure
    - [phases/experiment-execution.md](phases/experiment-execution.md) — Run, analyze, determine outcomes
    - [phases/reflection.md](phases/reflection.md) — Strategic decisions and looping
    - [phases/writing.md](phases/writing.md) — Reporting, dissemination, artifacts

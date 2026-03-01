@@ -111,6 +111,28 @@ research log. Any deviations after locking must be logged as EXPLORATORY.
 - **When we stop iterating:** [ ] Budget exhausted  [ ] Performance plateau  [ ] Target effect reached  [ ] Other: ___
 - **Reporting commitment:** We will report results regardless of outcome, including negative/neutral findings.
 
+## 10. Directory Layout
+
+Confirm the per-hypothesis directory is initialized:
+
+```
+experiments/H[N]-slug/
+├── docs/protocol.md          ← this file (locked)
+├── docs/analysis.md          # Filled after execution
+├── docs/notes.md             # Informal observations
+├── src/                      # Training, evaluation, analysis scripts
+├── src/configs/              # Hyperparameter and model configs
+├── data/raw/                 # Raw data or symlinks to shared/data/
+├── data/processed/           # Preprocessed data
+├── data/splits/              # Split definitions (indices or files)
+├── results/runs/             # Per-run outputs: {method}_{dataset}_{seed}/
+├── results/tables/           # Aggregated result tables
+├── results/figures/          # Plots and visualizations
+├── logs/runs/                # Per-run training logs
+├── logs/tracking/            # Experiment tracker exports
+└── logs/sanity-checks.md     # Sanity check results
+```
+
 ---
 
 **Protocol status:** [ ] DRAFT  [ ] UNDER REVIEW  [ ] LOCKED (date: ___)

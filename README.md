@@ -64,8 +64,7 @@ meta-research/
 │   ├── hypothesis-generation.md          # Generate and organize hypotheses
 │   ├── ideation-frameworks.md            # 12 cognitive frameworks for idea generation
 │   ├── judgment.md                       # Evaluate hypotheses before investing
-│   ├── experiment-design.md              # Per-hypothesis protocol design
-│   ├── experiment-design-reference.md   # Principles of rigorous experiment design
+│   ├── experiment-design.md              # Protocol design + rigor principles + per-hypothesis directory structure
 │   ├── experiment-execution.md           # Run experiments, analyze, determine outcomes
 │   ├── reflection.md                     # Strategic decisions and research loop
 │   └── writing.md                        # Reporting and dissemination

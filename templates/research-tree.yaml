@@ -43,7 +43,7 @@ hypotheses:
   #     rationale: ""                  # Brief explanation of verdict
   #   experiment:
   #     design_summary: ""
-  #     protocol_path: "experiments/H1-slug/protocol.md"
+  #     protocol_path: "experiments/H1-slug/docs/protocol.md"
   #     status: not_started            # not_started | designed | locked | running | done
   #   results:
   #     summary: ""
@@ -53,5 +53,5 @@ hypotheses:
   #         value: null
   #         baseline_value: null
   #         delta: null
-  #     artifacts_path: "experiments/H1-slug/results/"
+  #     artifacts_path: "experiments/H1-slug/"
   #   children: []                     # e.g., ["H1.1", "H1.2"]

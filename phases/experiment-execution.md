@@ -191,10 +191,23 @@ and interpreted more cautiously.
 Save outputs to the hypothesis's experiment directory:
 ```
 experiments/H[N]-slug/
-  protocol.md           # Locked protocol (from experiment design)
-  src/                  # Experiment code
-  results/              # Raw results, metrics, logs
-  analysis.md           # Consolidated analysis (sanity, primary, ablation, error)
+  docs/
+    protocol.md           # Locked protocol (from experiment design)
+    analysis.md           # Consolidated analysis (sanity, primary, ablation, error)
+    notes.md              # Informal observations, debugging notes
+  src/                    # Training, evaluation, analysis scripts + configs/
+  data/
+    raw/                  # Raw data or symlinks to shared/data/
+    processed/            # Preprocessed, split-ready data
+    splits/               # Train/val/test split definitions
+  results/
+    runs/                 # Per-run outputs: {method}_{dataset}_{seed}/
+    tables/               # Aggregated result tables (CSV/JSON)
+    figures/              # Generated plots and visualizations
+  logs/
+    runs/                 # Per-run training logs (stdout, metrics per step)
+    tracking/             # Experiment tracker exports (MLflow/W&B dumps)
+    sanity-checks.md      # Sanity check results before analysis
 ```
 
 ## Exit Criteria
