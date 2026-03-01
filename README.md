@@ -65,6 +65,7 @@ meta-research/
 │   ├── ideation-frameworks.md            # 12 cognitive frameworks for idea generation
 │   ├── judgment.md                       # Evaluate hypotheses before investing
 │   ├── experiment-design.md              # Per-hypothesis protocol design
+│   ├── experiment-design-reference.md   # Principles of rigorous experiment design
 │   ├── experiment-execution.md           # Run experiments, analyze, determine outcomes
 │   ├── reflection.md                     # Strategic decisions and research loop
 │   └── writing.md                        # Reporting and dissemination
@@ -90,6 +91,7 @@ meta-research/
 - **Research loop** — Reflects after experiments and decides: go deeper, go broader, pivot, or conclude
 - **Bias mitigation** — Separates exploratory vs confirmatory analysis, constrains researcher degrees of freedom
 - **Reproducibility-first** — Version control, pinned environments, experiment tracking built into the workflow
+- **Every hypothesis verified by experiment** — No claim accepted without empirical evidence from a rigorous test
 - **Falsification mindset** — Designs experiments to disprove, not confirm
 
 ## License

@@ -6,6 +6,12 @@ Create a locked, reviewable experimental protocol for a specific approved hypoth
 The protocol specifies exactly what will be tested, how, and what constitutes success —
 before running large-scale experiments.
 
+**Core axiom**: Every hypothesis must be verified by experiment. No claim is accepted
+without empirical evidence from a rigorous test. See the
+[Experiment Design Reference](experiment-design-reference.md) for the complete set of
+principles (falsifiability, controls, randomization, blinding, replication,
+pre-registration, validity, and more) that guide protocol design.
+
 ## Entry Conditions
 
 - At least one hypothesis has `status: approved` in the research tree (from Judgment)
@@ -180,3 +186,11 @@ execution, return here to fix the protocol and re-run.
 
 **Backward ← Reflection**: if reflection identifies missing experiments, return here to
 design additional tests for new or refined hypotheses.
+
+## Reference
+
+For the foundational principles behind every step in this protocol — falsifiability,
+controls, randomization, blinding, replication, pre-registration, statistical power,
+internal/external/construct validity, operationalization, minimal sufficiency,
+independence, effect size, multiple comparisons, reproducibility, transparency, and
+ethical design — see the [Experiment Design Reference](experiment-design-reference.md).

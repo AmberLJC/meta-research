@@ -26,10 +26,11 @@ research questions are answered.
 
 1. **Literature-first**: always start by understanding what the field already knows
 2. **Hypothesis-driven**: every experiment tests a specific, falsifiable hypothesis
-3. **Judgment before investment**: evaluate hypotheses before spending resources
-4. **Research loop**: reflect after experiments and decide: go deeper, go broader, pivot, or conclude
-5. **Falsification mindset**: design to disprove, not to confirm
-6. **Audit-ready**: every decision is logged with what, when, and why
+3. **Every hypothesis verified by experiment**: no claim is accepted without empirical evidence from a rigorous test
+4. **Judgment before investment**: evaluate hypotheses before spending resources
+5. **Research loop**: reflect after experiments and decide: go deeper, go broader, pivot, or conclude
+6. **Falsification mindset**: design to disprove, not to confirm
+7. **Audit-ready**: every decision is logged with what, when, and why
 
 ## Two Core Artifacts
 
@@ -119,7 +120,7 @@ Literature Survey → Hypothesis Generation → Judgment Gate → Experiment Des
 | **Literature Survey** | Understand SOTA, identify gaps, open problems, underexplored areas | [phases/literature-survey.md](phases/literature-survey.md) |
 | **Hypothesis Generation** | Generate broad testable hypotheses, maintain tree in YAML | [phases/hypothesis-generation.md](phases/hypothesis-generation.md) |
 | **Judgment Gate** | Evaluate: novel? important? feasible? falsifiable? already solved? | [phases/judgment.md](phases/judgment.md) |
-| **Experiment Design** | Rigorous per-hypothesis protocol | [phases/experiment-design.md](phases/experiment-design.md) |
+| **Experiment Design** | Rigorous per-hypothesis protocol ([design reference](phases/experiment-design-reference.md)) | [phases/experiment-design.md](phases/experiment-design.md) |
 | **Experiment Execution** | Run experiments, track results, update tree | [phases/experiment-execution.md](phases/experiment-execution.md) |
 | **Reflection** | Analyze results, decide: go deeper, go broader, pivot, or conclude | [phases/reflection.md](phases/reflection.md) |
 | **Writing** | (Optional exit) Draft paper, prepare artifacts | [phases/writing.md](phases/writing.md) |
@@ -165,6 +166,7 @@ and carry forward any reusable artifacts.
    - [phases/ideation-frameworks.md](phases/ideation-frameworks.md) — 12 cognitive frameworks for idea generation (loaded during hypothesis generation)
    - [phases/judgment.md](phases/judgment.md) — Evaluate hypotheses before investing
    - [phases/experiment-design.md](phases/experiment-design.md) — Protocol, data, controls
+   - [phases/experiment-design-reference.md](phases/experiment-design-reference.md) — Principles of rigorous experiment design (loaded during experiment design)
    - [phases/experiment-execution.md](phases/experiment-execution.md) — Run, analyze, determine outcomes
    - [phases/reflection.md](phases/reflection.md) — Strategic decisions and looping
    - [phases/writing.md](phases/writing.md) — Reporting, dissemination, artifacts
