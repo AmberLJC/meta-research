@@ -210,3 +210,18 @@ The goal: Be helpful without being annoying. Check in a few times a day, do usef
 ## Make It Yours
 
 This is a starting point. Add your own conventions, style, and rules as you figure out what works.
+
+## Git Discipline
+
+Commit at every small milestone — don't let work accumulate:
+- New file written → commit
+- Code runs successfully → commit
+- New paper or key finding → commit
+- Protocol or log updated → commit
+
+Pattern:
+```bash
+git add -A && git commit -m "milestone: <what-was-done>" && git push origin master
+```
+
+Never leave more than one logical unit of work uncommitted.
