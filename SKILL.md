@@ -11,7 +11,7 @@ argument-hint: "[research question or topic]"
 allowed-tools: Read, Write, Edit, Glob, Grep, Bash, WebSearch, WebFetch, Task, TaskCreate, TaskUpdate, TaskList, AskUserQuestion
 metadata:
   author: AmberLJC
-  version: "2.1.0"
+  version: "2.2.0"
   tags: research, science, AI, reproducibility, hypothesis-driven, meta-science
 ---
 
@@ -122,7 +122,7 @@ Literature Survey → Hypothesis Generation → Judgment Gate → Experiment Des
 | **Experiment Design** | Rigorous per-hypothesis protocol | [phases/experiment-design.md](phases/experiment-design.md) |
 | **Experiment Execution** | Run experiments, track results, update tree | [phases/experiment-execution.md](phases/experiment-execution.md) |
 | **Reflection** | Analyze results, decide: go deeper, go broader, pivot, or conclude | [phases/reflection.md](phases/reflection.md) |
-| **Writing** | (Optional exit) Draft paper, prepare artifacts | [phases/writing.md](phases/writing.md) |
+| **Writing** | (Optional exit) Draft paper, prepare artifacts. **Study 2-3 top related papers to learn their format, style, section structure, and experimental setup as a template before drafting.** | [phases/writing.md](phases/writing.md) |
 
 ### Transition Rules (when to loop back)
 
@@ -242,6 +242,56 @@ Load these templates when needed during the relevant phase:
 - [templates/research-log.md](templates/research-log.md) — Research log format and examples
 - [templates/experiment-protocol.md](templates/experiment-protocol.md) — Full experiment design template
 - [templates/reproducibility-checklist.md](templates/reproducibility-checklist.md) — Pre-submission checklist
+- [templates/research-tree.html](templates/research-tree.html) — Interactive HTML dashboard template
+- [templates/render-tree.py](templates/render-tree.py) — Python script to render the dashboard
+
+## Research Progress Dashboard
+
+When the user asks about progress, status, or wants to visualize the research tree, **render
+an interactive HTML dashboard** from the current `research-tree.yaml` and `research-log.md`.
+
+### How to render
+
+1. Read the project's `research-tree.yaml` (the full YAML content)
+2. Read the project's `research-log.md` (extract the log table entries)
+3. Run the render script:
+
+```bash
+python /path/to/meta-research/templates/render-tree.py /path/to/project --open
+```
+
+Or, if the user doesn't have PyYAML installed, render inline:
+- Read `templates/research-tree.html`
+- Parse `research-tree.yaml` into JSON
+- Parse `research-log.md` table into a JSON array of `{num, date, phase, summary}`
+- Infer the current phase from the latest log entry or data state
+- Build the `RESEARCH_DATA` JSON object:
+  ```json
+  {
+    "project": { ... },
+    "field_understanding": { ... },
+    "hypotheses": [ ... ],
+    "research_log": [ {"num":"1","date":"...","phase":"...","summary":"..."} ],
+    "current_phase": "hypothesis_generation"
+  }
+  ```
+- Replace `{{RESEARCH_DATA_JSON}}` in the template with the JSON string
+- Write the result to `research-tree.html` in the project directory
+- Open it with `open research-tree.html` (macOS) or `xdg-open research-tree.html` (Linux)
+
+### When to render
+
+Render the dashboard when the user:
+- Asks "what's the progress?", "show me the research tree", "status", "where are we?"
+- Asks to "visualize" or "see" the hypothesis tree
+- Completes a major phase transition (offer to render)
+- Explicitly requests the HTML view
+
+After rendering, briefly summarize the current state in text as well:
+- Current phase and what was last completed
+- Hypothesis counts (total / approved / completed)
+- Key findings so far (supported/refuted outcomes)
+- Recommended next action
 
 ## Autonomy Guidelines
 
@@ -259,6 +309,21 @@ at phase transitions and strategic decisions**:
 When in doubt about a research decision, present the options with tradeoffs rather than
 making the choice silently. Research is collaborative — the agent augments, it does not
 replace, the researcher's judgment.
+
+## Research Advisor Mode (Cron)
+
+This mode runs every **15 minutes** via cron. On each invocation, act as a **research advisor**
+rather than an executor. Read the current `research-tree.yaml` and `research-log.md`, then:
+
+1. **Criticize**: identify weak hypotheses, gaps in reasoning, missing controls, or stale branches
+2. **Brainstorm**: suggest new hypotheses, alternative framings, or overlooked connections
+3. **Enrich/Refine**: propose sharper formulations, stronger baselines, or additional metrics
+4. **Supervise**: flag stalled experiments, unlogged decisions, or skipped bias checks
+5. **Push progress**: recommend concrete next actions to keep the research moving forward
+
+Write all feedback as a new entry in `research-log.md` with phase `Advisor Review`. Present
+constructive, actionable suggestions — not just problems. If the project looks healthy, say so
+briefly and highlight the most promising direction.
 
 ## Error Recovery
 
