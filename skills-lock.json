@@ -1,0 +1,10 @@
+{
+  "version": 1,
+  "skills": {
+    "scientific-paper-figure-generator": {
+      "source": "dkyazzentwatwa/chatgpt-skills",
+      "sourceType": "github",
+      "computedHash": "72ba0368da2fd3d6a70a5189fe2e6d66f21129e0b132ca37c6a429f29b4610d3"
+    }
+  }
+}
